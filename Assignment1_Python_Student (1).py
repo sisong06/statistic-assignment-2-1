@@ -26,7 +26,7 @@ p_above_80 = stats.norm.sf(80, loc=mu, scale=sigma)  # TODO: stats.norm.sf(...) 
 
 # 문제 4. 60~80점 사이 확률 P(60 <= X <= 80)을 구할 것
 # 힌트: P(X <= 80) - P(X <= 60)
-p_60_to_80 = stats.norm.cdf(80, loc=mu, scale=sigma) # TODO
+p_60_to_80 = stats.norm.cdf(80, loc=mu, scale=sigma)- stats.norm.cdf(60, loc=mu, scale=sigma) # TODO
 
 # 문제 5. 상위 5%에 해당하는 점수(95백분위수)를 구할 것
 # stats.norm.ppf(확률, loc=평균, scale=표준편차)는 해당 분위수를 반환함
@@ -45,7 +45,7 @@ print('5. 상위 5% 기준점:', cutoff_top_5)
 # 주의: 확률밀도(세로축)는 특정 점에서의 확률 그 자체가 아님
 if mu is not None and sigma is not None:
     x = np.linspace(40, 100, 400)
-    y = stats.norm.pdf(x, loc=mu, sclae=sigma) # TODO: stats.norm.pdf(...) 사용
+    y = stats.norm.pdf(x, loc=mu, scale=sigma) # TODO: stats.norm.pdf(...) 사용
     if y is not None:
         plt.plot(x, y, label='Normal density')
         plt.axvline(mu, linestyle='--', label='Mean = 70')
@@ -54,6 +54,7 @@ if mu is not None and sigma is not None:
         plt.ylabel('Density')
         plt.legend()
         plt.grid(alpha=0.3)
+        plt.savefig("normal_distribution.png")
         plt.show()
 
 # [서술] 위 결과가 뜻하는 바를 2~3문장으로 작성할 것
